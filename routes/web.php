@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\PersonController;
+use App\Http\Controllers\PersonLogController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,13 +16,21 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->route('persons.index');
 });
 
+Route::post('persons/store-without-transaction', [PersonController::class, 'storeWithoutTransaction'])
+->name('persons.storeWithoutTransaction');
 Route::resource('persons', PersonController::class)
     ->only([
         'index',
         'create',
         'store',
+        'show',
+    ]);
+
+Route::resource('logs', PersonLogController::class)
+    ->only([
+        'index',
         'show'
     ]);

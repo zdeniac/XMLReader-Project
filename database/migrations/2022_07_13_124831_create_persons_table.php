@@ -14,12 +14,13 @@ return new class extends Migration
     public function up()
     {
         Schema::create('persons', function (Blueprint $table) {
-            $table->increments('id');
+            $table->id();
             $table->integer('id2')->unique();
-            $table->string('tax_number', 13);
+            $table->string('tax_number', 13)->unique();
             $table->string('full_name');
             $table->string('email');
-            $table->timestamps();
+            $table->date('login_date');
+            $table->date('logout_date');
         });
     }
 
